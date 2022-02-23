@@ -8,13 +8,19 @@ type TaskListPropsType = {
     tasksList: TaskType[]
     removeTask: (taskID:string)=> void
     changeFilter: (filter: FilterValueType)=>void
+    changeTaskStatus: (taskID: string, isDone: boolean) => void
+    filter: FilterValueType
 };
 
 const TasksList = (props: TaskListPropsType) => {
     //console.log(props.tasksList)// массив объектов
     const tasksComponentList = props.tasksList.map((task, index)=>{
 
-        return <Task key={index} {...task} removeTask={props.removeTask} />
+        return <Task key={index}
+                     {...task}
+                     removeTask={props.removeTask}
+                     changeTaskStatus={props.changeTaskStatus}
+        />
     })
     return (
         <div>
@@ -23,7 +29,10 @@ const TasksList = (props: TaskListPropsType) => {
 
             </ul>
 
-                <TodoListButtons changeFilter={props.changeFilter}/>
+                <TodoListButtons
+                    changeFilter={props.changeFilter}
+                    filter={props.filter}
+                />
 
         </div>
     );

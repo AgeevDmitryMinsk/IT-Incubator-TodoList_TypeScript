@@ -18,7 +18,14 @@ function App() {
         {id: v1(), title: "TS", isDone: false}
     ])
 
+
     const [filter, setFilter] = useState<FilterValueType>(`all`)
+
+    const changeTaskStatus = (taskID: string, isDone: boolean) => {
+        setTasks(tasks.map(t => t.id === taskID
+          ? {id: t.id, title:t.title.split(``).reverse().join(``),  isDone: !t.isDone}
+          : t))
+    }
 
     const addTask = (title: string) => {
         let task = {id: v1(), title: title, isDone: false}
@@ -28,12 +35,13 @@ function App() {
 
     const removeTask = (taskID: string) => {
         const filteredTasks = tasks.filter(task => task.id !== taskID)
+        console.log(35, filteredTasks)
         setTasks(filteredTasks)
     }
 
     const changeFilter = (filter: FilterValueType) => {
         setFilter(filter)
-        console.log(filter)
+        //console.log(filter)
     }
 
     const getFilteredTasksForRender = () => {
@@ -58,7 +66,11 @@ function App() {
                       removeTask={removeTask}
                       changeFilter={changeFilter}
                       addTask={addTask}
+                      changeTaskStatus={changeTaskStatus}
+                      filter={filter}
             />
+
+
             {/*<TodoList title={`2nd TodoList`} tasksList={tasks_2} />*/}
             {/*<TodoList title={`3d Todolist`} tasksList={tasks_3}  />*/}
 

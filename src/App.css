@@ -8,3 +8,17 @@
 .App > div {
   margin-right: 50px;
 }
+
+.errorCSS{
+  outline: none ;
+  border: 2px solid red;
+}
+
+
+.active_filter_button {
+  background-color: aqua;
+}
+
+.is_done_task{
+  opacity: 0.5;
+}

@@ -3,7 +3,6 @@ import './App.css';
 
 import TodoList, {TaskType} from "./TodoList";
 import {v1} from 'uuid';
-import {log} from "util";
 
 
 export type FilterValueType = 'all' | 'active' | 'completed'
@@ -65,17 +64,25 @@ function App() {
 
 	const changeTaskStatus = (taskID: string, isDone: boolean, todoListID: string) => {
 
-		//debugger
-		let tasks = tasksObj[todoListID]
-		let task = tasks.find(t => t.id === taskID)
-		if (task) {
-			task.isDone = isDone
-			setTasks({...tasksObj})
-		}
+		debugger
+		// let tasks = tasksObj[todoListID]
+		// let task = tasks.find(t => t.id === taskID)
+		// if (task) {
+		// 	task.isDone = isDone
+		// 	setTasks({...tasksObj})
+		// }
 
-		// setTasks(tasks.map(t => t.id === taskID
-		// 	? {id: t.id, title: t.title.split(``).reverse().join(``), isDone: !t.isDone}
-		// 	: t))
+		// console.log(74)
+		let tasks = tasksObj[todoListID]
+		tasksObj[todoListID] = tasks.map(task => task.id === taskID
+			? {id: task.id, title: task.title.split(``).reverse().join(``), isDone: isDone}
+			: task)
+
+		// ? {id: task.id, title: ttask.title.split(``).reverse().join(``), isDone: !isDone}
+		// : task
+		// })
+		setTasks({...tasksObj})
+		// ? {id: t.id, title: t.title.split(``).reverse().join(``), isDone: !t.isDone}
 	}
 
 	const addTask = (title: string, todoListID: string) => {

@@ -10,7 +10,7 @@ type TodoListButtonsType = {
 
 const TodoListButtons = (props: TodoListButtonsType) => {
 	function onAllClickHandle() {
-		console.log(13, props.todoListID, props.filter)
+
 		props.changeFilter(`all` , props.todoListID)
 	}
 

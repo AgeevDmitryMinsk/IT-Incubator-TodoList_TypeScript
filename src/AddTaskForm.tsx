@@ -2,7 +2,8 @@ import React, {ChangeEvent, useState} from 'react';
 
 
 type AddTaskFormPropsType = {
-    addTask: (title: string) => void
+    addTask: (title: string, todoListID: string) => void
+    todoListID: string
 }
 
 const AddTaskForm = (props: AddTaskFormPropsType) => {
@@ -29,7 +30,7 @@ const AddTaskForm = (props: AddTaskFormPropsType) => {
     function onClickButtonHandler() {
         const trimmedTitle = title.trim()
         if (trimmedTitle) {
-            props.addTask(trimmedTitle)
+            props.addTask(trimmedTitle, props.todoListID)
         } else {
             setError(true)
         }

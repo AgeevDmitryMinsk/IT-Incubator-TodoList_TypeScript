@@ -7,47 +7,50 @@ import AddTaskForm from "./AddTaskForm";
 import {FilterValueType} from "./App";
 
 type TodoListPropsType = {
-    title: string,
-    tasksList: TaskType[] // список дел tasksList = массив по типу TaskType
-    removeTask: (taskID: string) => void
-    changeFilter: (filter: FilterValueType) => void
-    addTask: (title: string) => void
-    changeTaskStatus: (taskID: string, isDone: boolean) => void
-    filter: FilterValueType
+	title: string,
+	tasksList: TaskType[] // список дел tasksList = массив по типу TaskType
+	removeTask: (taskID: string, todoListID: string) => void
+	changeFilter: (filter: FilterValueType, todoListID: string) => void
+	addTask: (title: string, todoListID: string) => void
+	changeTaskStatus: (taskID: string, isDone: boolean, todoListID: string) => void
+	filter: FilterValueType
+	todoListID: string
 }
 
 export type TaskType = { // в каждом списке дел есть:
-    id: string,          // порядковый номер дела id,
-    title: string,       // название дела title
-    isDone: boolean      // выполено ли дело isDone
+	id: string,          // порядковый номер дела id,
+	title: string,       // название дела title
+	isDone: boolean      // выполено ли дело isDone
 }
 
 const TodoList = (props: TodoListPropsType) => {
-    return (
-        <div>
-            {/*<h3>What to learn</h3>*/}
-            {/*<h3>{props.title}</h3>*/}
-            <TodoListHeader title={props.title}/>
+	return (
+		<div>
+			{/*<h3>What to learn</h3>*/}
+			{/*<h3>{props.title}</h3>*/}
+			<TodoListHeader title={props.title}/>
 
-            {/*<div>*/}
-            {/*    <input/>*/}
-            {/*    <button>+</button>*/}
-            {/*</div>*/}
-            <AddTaskForm addTask={props.addTask}
-                // setTitle={props.setTitle}
-            />
-
-
-            < TasksList tasksList={props.tasksList}
-                        removeTask={props.removeTask}
-                        changeFilter={props.changeFilter}
-                        changeTaskStatus={props.changeTaskStatus}
-                        filter={props.filter}
-            />
+			{/*<div>*/}
+			{/*    <input/>*/}
+			{/*    <button>+</button>*/}
+			{/*</div>*/}
+			<AddTaskForm addTask={props.addTask}
+									 todoListID={props.todoListID}
+				// setTitle={props.setTitle}
+			/>
 
 
-        </div>
-    )
+			< TasksList tasksList={props.tasksList}
+									removeTask={props.removeTask}
+									changeFilter={props.changeFilter}
+									changeTaskStatus={props.changeTaskStatus}
+									filter={props.filter}
+									todoListID={props.todoListID}
+			/>
+
+
+		</div>
+	)
 };
 
 export default TodoList;

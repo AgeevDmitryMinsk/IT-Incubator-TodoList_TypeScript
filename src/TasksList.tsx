@@ -5,37 +5,41 @@ import {FilterValueType} from "./App";
 import TodoListButtons from "./TodoListButtons";
 
 type TaskListPropsType = {
-    tasksList: TaskType[]
-    removeTask: (taskID:string)=> void
-    changeFilter: (filter: FilterValueType)=>void
-    changeTaskStatus: (taskID: string, isDone: boolean) => void
-    filter: FilterValueType
+	tasksList: TaskType[]
+	removeTask: (taskID: string, todoListID: string) => void
+	changeFilter: (filter: FilterValueType, todoListID: string) => void
+	changeTaskStatus: (taskID: string, isDone: boolean, todoListID: string) => void
+	filter: FilterValueType
+	todoListID: string
 };
 
 const TasksList = (props: TaskListPropsType) => {
-    //console.log(props.tasksList)// массив объектов
-    const tasksComponentList = props.tasksList.map((task, index)=>{
+	//console.log(props.tasksList)// массив объектов
+	const tasksComponentList = props.tasksList.map((task, index) => {
 
-        return <Task key={index}
-                     {...task}
-                     removeTask={props.removeTask}
-                     changeTaskStatus={props.changeTaskStatus}
-        />
-    })
-    return (
-        <div>
-            <ul>
-                {tasksComponentList}
+		return <Task key={index}
+								 {...task}
+			           taskId={task.id}
+								 todoListID={props.todoListID}
+								 removeTask={props.removeTask}
+								 changeTaskStatus={props.changeTaskStatus}
+		/>
+	})
+	return (
+		<div>
+			<ul>
+				{tasksComponentList}
 
-            </ul>
+			</ul>
 
-                <TodoListButtons
-                    changeFilter={props.changeFilter}
-                    filter={props.filter}
-                />
+			<TodoListButtons
+				changeFilter={props.changeFilter}
+				todoListID={props.todoListID}
+				filter={props.filter}
+			/>
 
-        </div>
-    );
+		</div>
+	);
 };
 
 export default TasksList;

@@ -3,18 +3,21 @@ import {TaskType} from "./TodoList";
 import {Button} from "./components/Button";
 
 type TaskPropsType = TaskType & {
-	removeTask: (taskID: string) => void
-	changeTaskStatus: (taskID: string, isDone: boolean) => void
+	taskId: string
+	removeTask: (taskID: string, todoListID: string) => void
+	changeTaskStatus: (taskID: string, isDone: boolean, todoListID: string) => void
+	todoListID: string
 }
 
 const Task = (props: TaskPropsType) => {
 
 	function onClickRemoveButtonHandler() {
-		props.removeTask(props.id)
+		console.log(14, props.todoListID, props.title)
+		props.removeTask(props.taskId, props.todoListID)
 	}
 
 	function onChangeInputHandler(e: ChangeEvent<HTMLInputElement>) {
-		props.changeTaskStatus(props.id, e.currentTarget.checked)
+		props.changeTaskStatus(props.id, e.currentTarget.checked, props.todoListID)
 
 	}
 
@@ -23,7 +26,7 @@ const Task = (props: TaskPropsType) => {
 		<li className={props.isDone ? "is_done_task" : ""}>
 			<button onClick={onClickRemoveButtonHandler}>X</button>
 
-			<Button name={`X(universal)`}
+			<Button name={`X(univ)`}
 							className={``}
 							callBack={onClickRemoveButtonHandler}/>
 
